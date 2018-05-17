@@ -1,9 +1,6 @@
-//
-//  Photo.swift
-//  Unsplash
-//
-//  Created by Patrik Billgert on 2018-05-17.
-//  Copyright © 2018 Patrik Billgert. All rights reserved.
-//
-
 import Foundation
+
+struct Photo: Codable {
+    let id: String
+    let urls: [String: String]
+}
