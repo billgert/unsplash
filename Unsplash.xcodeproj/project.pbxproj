@@ -10,6 +10,10 @@
 		1817692220ADC4DE009C34F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817692120ADC4DE009C34F2 /* AppDelegate.swift */; };
 		1817692920ADC4DF009C34F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1817692820ADC4DF009C34F2 /* Assets.xcassets */; };
 		1817692C20ADC4DF009C34F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1817692A20ADC4DF009C34F2 /* LaunchScreen.storyboard */; };
+		1849F89020AE184500C5DC44 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F88F20AE184500C5DC44 /* Photo.swift */; };
+		1849F89220AE185200C5DC44 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F89120AE185200C5DC44 /* SearchResponse.swift */; };
+		1849F89420AE21B500C5DC44 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F89320AE21B500C5DC44 /* NetworkError.swift */; };
+		1849F89820AE3ACD00C5DC44 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F89720AE3ACD00C5DC44 /* ImageService.swift */; };
 		18B2312820AE020900F254AA /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B2312720AE020900F254AA /* WebService.swift */; };
 		18B2312A20AE02C300F254AA /* WebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B2312920AE02C300F254AA /* WebRouter.swift */; };
 		18B2312C20AE06A300F254AA /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B2312B20AE06A300F254AA /* NetworkConstants.swift */; };
@@ -23,6 +27,10 @@
 		1817692820ADC4DF009C34F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1817692B20ADC4DF009C34F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1817692D20ADC4DF009C34F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1849F88F20AE184500C5DC44 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		1849F89120AE185200C5DC44 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
+		1849F89320AE21B500C5DC44 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		1849F89720AE3ACD00C5DC44 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		18B2312720AE020900F254AA /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		18B2312920AE02C300F254AA /* WebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRouter.swift; sourceTree = "<group>"; };
 		18B2312B20AE06A300F254AA /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
@@ -65,16 +73,15 @@
 		1817692020ADC4DE009C34F2 /* Unsplash */ = {
 			isa = PBXGroup;
 			children = (
-				185FBE6120ADEF0E00BBBDF5 /* Coordinators */,
-				185FBE6620ADEF6400BBBDF5 /* Extensions */,
-				185FBE6520ADEF6100BBBDF5 /* Models */,
-				185FBE6320ADEF5A00BBBDF5 /* Networking */,
-				185FBE6220ADEF5600BBBDF5 /* Protocols */,
-				185FBE6020ADEEB300BBBDF5 /* Screens */,
 				1817692120ADC4DE009C34F2 /* AppDelegate.swift */,
 				1817692820ADC4DF009C34F2 /* Assets.xcassets */,
 				1817692D20ADC4DF009C34F2 /* Info.plist */,
 				1817692A20ADC4DF009C34F2 /* LaunchScreen.storyboard */,
+				185FBE6120ADEF0E00BBBDF5 /* Coordinators */,
+				185FBE6620ADEF6400BBBDF5 /* Extensions */,
+				185FBE6320ADEF5A00BBBDF5 /* Networking */,
+				185FBE6220ADEF5600BBBDF5 /* Protocols */,
+				185FBE6020ADEEB300BBBDF5 /* Screens */,
 			);
 			path = Unsplash;
 			sourceTree = "<group>";
@@ -105,7 +112,10 @@
 		185FBE6320ADEF5A00BBBDF5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				185FBE6520ADEF6100BBBDF5 /* Models */,
+				1849F89720AE3ACD00C5DC44 /* ImageService.swift */,
 				18B2312B20AE06A300F254AA /* NetworkConstants.swift */,
+				1849F89320AE21B500C5DC44 /* NetworkError.swift */,
 				18B2312720AE020900F254AA /* WebService.swift */,
 				18B2312920AE02C300F254AA /* WebRouter.swift */,
 			);
@@ -115,6 +125,8 @@
 		185FBE6520ADEF6100BBBDF5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1849F88F20AE184500C5DC44 /* Photo.swift */,
+				1849F89120AE185200C5DC44 /* SearchResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -277,10 +289,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1849F89020AE184500C5DC44 /* Photo.swift in Sources */,
+				1849F89420AE21B500C5DC44 /* NetworkError.swift in Sources */,
+				1849F89820AE3ACD00C5DC44 /* ImageService.swift in Sources */,
 				18B2312820AE020900F254AA /* WebService.swift in Sources */,
 				18B2312C20AE06A300F254AA /* NetworkConstants.swift in Sources */,
 				18B2312A20AE02C300F254AA /* WebRouter.swift in Sources */,
 				1817692220ADC4DE009C34F2 /* AppDelegate.swift in Sources */,
+				1849F89220AE185200C5DC44 /* SearchResponse.swift in Sources */,
 				18F87AFE20ADF7C50083E9ED /* ExploreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
