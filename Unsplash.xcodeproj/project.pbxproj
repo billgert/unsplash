@@ -16,6 +16,7 @@
 		1849F89A20AE3E9200C5DC44 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F89920AE3E9200C5DC44 /* ErrorHandler.swift */; };
 		1849F8A220AE42D800C5DC44 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F8A120AE42D800C5DC44 /* ErrorResponse.swift */; };
 		1849F8A420AE475D00C5DC44 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F8A320AE475D00C5DC44 /* Coordinator.swift */; };
+		1849F8A620AE47BF00C5DC44 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F8A520AE47BF00C5DC44 /* AppCoordinator.swift */; };
 		18B2312820AE020900F254AA /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B2312720AE020900F254AA /* WebService.swift */; };
 		18B2312A20AE02C300F254AA /* WebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B2312920AE02C300F254AA /* WebRouter.swift */; };
 		18B2312C20AE06A300F254AA /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B2312B20AE06A300F254AA /* NetworkConstants.swift */; };
@@ -35,6 +36,7 @@
 		1849F89920AE3E9200C5DC44 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		1849F8A120AE42D800C5DC44 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		1849F8A320AE475D00C5DC44 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		1849F8A520AE47BF00C5DC44 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		18B2312720AE020900F254AA /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		18B2312920AE02C300F254AA /* WebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRouter.swift; sourceTree = "<group>"; };
 		18B2312B20AE06A300F254AA /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
@@ -94,8 +96,8 @@
 		1849F8A020AE409100C5DC44 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				1849F89920AE3E9200C5DC44 /* ErrorHandler.swift */,
 				1849F8A320AE475D00C5DC44 /* Coordinator.swift */,
+				1849F89920AE3E9200C5DC44 /* ErrorHandler.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -112,6 +114,7 @@
 		185FBE6120ADEF0E00BBBDF5 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				1849F8A520AE47BF00C5DC44 /* AppCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1849F8A620AE47BF00C5DC44 /* AppCoordinator.swift in Sources */,
 				1849F89020AE184500C5DC44 /* Photo.swift in Sources */,
 				1849F89420AE21B500C5DC44 /* NetworkError.swift in Sources */,
 				18B2312820AE020900F254AA /* WebService.swift in Sources */,
