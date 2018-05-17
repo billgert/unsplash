@@ -4,7 +4,7 @@ enum NetworkError: Error {
     case internet
     case jsonSerialization
     case jsonDecoder
-    case backend(errors: [String])
+    case backend(errorResponse: ErrorResponse)
 }
 
 extension NetworkError: LocalizedError {
@@ -14,8 +14,8 @@ extension NetworkError: LocalizedError {
             return "Your internet connection seems to be offline."
         case .jsonSerialization, .jsonDecoder:
             return "There seems to be a parsing error."
-        case .backend(let errors):
-            return errors.joined(separator: ". ")
+        case .backend(let errorResponse):
+            return errorResponse.errors.joined(separator: ". ")
         }
     }
 }
