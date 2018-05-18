@@ -14,7 +14,7 @@ class ExplorePhotoCell: UICollectionViewCell {
             guard let url = URL(string: imageUrl) else { return }
             imageView.af_setImage(
                 withURL: url,
-                imageTransition: .flipFromBottom(0.3)
+                imageTransition: .crossDissolve(0.2)
             )
         }
     }

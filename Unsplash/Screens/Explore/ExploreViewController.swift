@@ -9,11 +9,11 @@ class ExploreViewController: UIViewController, ErrorHandler {
     }()
     
     lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let view = UICollectionView(frame: .zero, collectionViewLayout: ExploreCollectionLayout())
         view.register(ExplorePhotoCell.self, forCellWithReuseIdentifier: "ExplorePhotoCell")
         view.backgroundColor = .clear
+        view.keyboardDismissMode = .interactive
+        view.contentInset = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         return view
     }()
     
@@ -54,7 +54,7 @@ class ExploreViewController: UIViewController, ErrorHandler {
             .disposed(by: disposeBag)
         
         searchBar.rx.text.orEmpty
-            .throttle(0.5, scheduler: MainScheduler.instance)
+            .throttle(0.3, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(to: viewModel.textInput)
             .disposed(by: disposeBag)

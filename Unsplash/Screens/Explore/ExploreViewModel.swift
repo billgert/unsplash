@@ -22,7 +22,7 @@ class ExploreViewModel {
 
 extension ExploreViewModel {
     func getPhotos() {
-        webService.request(router: .photos(perPage: 50), type: [Photo].self)
+        webService.request(router: .photos(perPage: 25), type: [Photo].self)
             .subscribe({ [weak self] (event) in
                 switch event {
                 case .next(let photos):
@@ -39,7 +39,7 @@ extension ExploreViewModel {
     private func bindTextInput() {
         textInput.asObservable()
             .flatMap({ [unowned self] (text) -> Observable<SearchResponse> in
-                self.webService.request(router: .searchPhotos(query: text, perPage: 50), type: SearchResponse.self)
+                self.webService.request(router: .searchPhotos(query: text, perPage: 25), type: SearchResponse.self)
             })
             .subscribe({ [weak self] (event) in
                 switch event {
