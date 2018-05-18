@@ -30,14 +30,12 @@ extension ExploreCoordinator {
 
 extension ExploreCoordinator: ExploreViewModelDelegate {
     func didSelectPhoto(_ photo: Photo) {
-        print(photo.id)
+        presentPhotoViewController(with: photo)
     }
 }
 
 extension ExploreCoordinator: PhotoViewModelDelegate {
-    
     func didTapDismissButton() {
         navigationController.dismiss(animated: true)
     }
-    
 }
