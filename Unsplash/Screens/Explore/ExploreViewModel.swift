@@ -7,7 +7,7 @@ protocol ExploreViewModelDelegate: AnyObject {
 class ExploreViewModel {
     let error = Variable<Error>(NetworkError.internet)
     let textInput = Variable<String>("")
-    let results = Variable<[Photo]>([])
+    let photos = Variable<[Photo]>([])
     
     let disposeBag = DisposeBag()
     let webService = WebService()
@@ -22,11 +22,11 @@ class ExploreViewModel {
 
 extension ExploreViewModel {
     func getPhotos() {
-        webService.request(router: .photos(perPage: 25), type: [Photo].self)
+        webService.request(router: .photos(perPage: 20), type: [Photo].self)
             .subscribe({ [weak self] (event) in
                 switch event {
                 case .next(let photos):
-                    self?.results.value = photos
+                    self?.photos.value = photos
                 case .completed:
                     print("completed: photos")
                 case .error(let error):
@@ -39,12 +39,12 @@ extension ExploreViewModel {
     private func bindTextInput() {
         textInput.asObservable()
             .flatMap({ [unowned self] (text) -> Observable<SearchResponse> in
-                self.webService.request(router: .searchPhotos(query: text, perPage: 25), type: SearchResponse.self)
+                self.webService.request(router: .searchPhotos(query: text, perPage: 20), type: SearchResponse.self)
             })
             .subscribe({ [weak self] (event) in
                 switch event {
                 case .next(let response):
-                    self?.results.value = response.results
+                    self?.photos.value = response.results
                 case .completed:
                     print("completed: textInput")
                 case .error(let error):

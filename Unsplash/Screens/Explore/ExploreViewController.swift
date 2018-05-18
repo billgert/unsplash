@@ -11,8 +11,10 @@ class ExploreViewController: UIViewController, ErrorHandler {
     lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: ExploreCollectionLayout())
         view.register(ExplorePhotoCell.self, forCellWithReuseIdentifier: "ExplorePhotoCell")
-        view.backgroundColor = .clear
+        view.dataSource = self
+        view.delegate = self
         view.keyboardDismissMode = .interactive
+        view.backgroundColor = .clear
         view.contentInset = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         return view
     }()
@@ -59,18 +61,30 @@ class ExploreViewController: UIViewController, ErrorHandler {
             .bind(to: viewModel.textInput)
             .disposed(by: disposeBag)
         
-        viewModel.results.asObservable()
-            .bind(to: collectionView.rx.items(
-                cellIdentifier: "ExplorePhotoCell",
-                cellType: ExplorePhotoCell.self)) { (index, photo: Photo, cell) in
-                    cell.photo = photo
-            }
-            .disposed(by: disposeBag)
-        
-        collectionView.rx.modelSelected(Photo.self)
-            .subscribe(onNext: { [unowned self] (photo) in
-                self.viewModel.coordinatorDelegate?.didSelectPhoto(photo)
+        viewModel.photos.asObservable()
+            .bind(onNext: { [weak self] _ in
+                self?.collectionView.collectionViewLayout.invalidateLayout()
+                self?.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
+    }
+}
+
+extension ExploreViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.photos.value.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExplorePhotoCell", for: indexPath) as! ExplorePhotoCell
+        cell.photo = viewModel.photos.value[indexPath.item]
+        return cell
+    }
+}
+
+extension ExploreViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let photo = viewModel.photos.value[indexPath.item]
+        viewModel.coordinatorDelegate?.didSelectPhoto(photo)
     }
 }
