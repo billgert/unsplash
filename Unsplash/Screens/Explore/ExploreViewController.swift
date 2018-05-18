@@ -1,17 +1,21 @@
 import RxSwift
 import RxCocoa
 
-class ExplorePhotoCell: UICollectionViewCell {
-    var item: ExplorePhotoItem?
-}
-
-struct ExplorePhotoItem {
-    var photo: Photo
-}
-
 class ExploreViewController: UIViewController, ErrorHandler {
-    let searchBar = UISearchBar()
-    let collectionView = UICollectionView()
+    lazy var searchBar: UISearchBar = {
+        let view = UISearchBar()
+        view.placeholder = "Search photos"
+        return view
+    }()
+    
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.register(ExplorePhotoCell.self, forCellWithReuseIdentifier: "ExplorePhotoCell")
+        view.backgroundColor = .clear
+        return view
+    }()
     
     let disposeBag = DisposeBag()
     let viewModel: ExploreViewModel
@@ -25,17 +29,25 @@ class ExploreViewController: UIViewController, ErrorHandler {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        super.loadView()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.titleView = searchBar
+        
+        view.addSubview(collectionView, constraints: [
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
         setupBindings()
+        viewModel.getPhotos()
     }
     
-    func setupBindings() {
+    private func setupBindings() {
         viewModel.error.asObservable()
+            .skip(1)
             .subscribe(onNext: { [weak self] (error) in
                 self?.handleError(error)
             })
@@ -50,14 +62,14 @@ class ExploreViewController: UIViewController, ErrorHandler {
         viewModel.results.asObservable()
             .bind(to: collectionView.rx.items(
                 cellIdentifier: "ExplorePhotoCell",
-                cellType: ExplorePhotoCell.self)) { (index, photoItem: ExplorePhotoItem, cell) in
-                    cell.item = photoItem
+                cellType: ExplorePhotoCell.self)) { (index, photo: Photo, cell) in
+                    cell.photo = photo
             }
             .disposed(by: disposeBag)
         
-        collectionView.rx.modelSelected(ExplorePhotoItem.self)
-            .subscribe(onNext: { [unowned self] (photoItem) in
-                self.viewModel.coordinatorDelegate?.didSelectPhoto(photoItem.photo)
+        collectionView.rx.modelSelected(Photo.self)
+            .subscribe(onNext: { [unowned self] (photo) in
+                self.viewModel.coordinatorDelegate?.didSelectPhoto(photo)
             })
             .disposed(by: disposeBag)
     }

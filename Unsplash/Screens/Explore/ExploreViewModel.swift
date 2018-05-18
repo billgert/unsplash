@@ -7,7 +7,7 @@ protocol ExploreViewModelDelegate: AnyObject {
 class ExploreViewModel {
     let error = Variable<Error>(NetworkError.internet)
     let textInput = Variable<String>("")
-    let results = Variable<[ExplorePhotoItem]>([])
+    let results = Variable<[Photo]>([])
     
     let disposeBag = DisposeBag()
     let webService = WebService()
@@ -16,23 +16,17 @@ class ExploreViewModel {
     
     init(coordinatorDelegate: ExploreViewModelDelegate) {
         self.coordinatorDelegate = coordinatorDelegate
-        getAllPhotos()
         bindTextInput()
     }
 }
 
 extension ExploreViewModel {
-    private func getAllPhotos() {
-        webService.request(router: .photos, type: [Photo].self)
-            .map({ (photos) -> [ExplorePhotoItem] in
-                return photos.map({ (photo) -> ExplorePhotoItem in
-                    return ExplorePhotoItem(photo: photo)
-                })
-            })
+    func getPhotos() {
+        webService.request(router: .photos(perPage: 50), type: [Photo].self)
             .subscribe({ [weak self] (event) in
                 switch event {
-                case .next(let photoItems):
-                    self?.results.value = photoItems
+                case .next(let photos):
+                    self?.results.value = photos
                 case .completed:
                     print("completed: photos")
                 case .error(let error):
@@ -45,17 +39,12 @@ extension ExploreViewModel {
     private func bindTextInput() {
         textInput.asObservable()
             .flatMap({ [unowned self] (text) -> Observable<SearchResponse> in
-                self.webService.request(router: .searchPhotos(query: text), type: SearchResponse.self)
-            })
-            .map({ (response) -> [ExplorePhotoItem] in
-                response.results.map({ (photo) -> ExplorePhotoItem in
-                    ExplorePhotoItem(photo: photo)
-                })
+                self.webService.request(router: .searchPhotos(query: text, perPage: 50), type: SearchResponse.self)
             })
             .subscribe({ [weak self] (event) in
                 switch event {
-                case .next(let photoItems):
-                    self?.results.value = photoItems
+                case .next(let response):
+                    self?.results.value = response.results
                 case .completed:
                     print("completed: textInput")
                 case .error(let error):
