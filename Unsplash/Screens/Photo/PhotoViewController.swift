@@ -1,5 +1,4 @@
 import UIKit
-import AlamofireImage
 import Hero
 
 class PhotoViewController: UIViewController, ErrorHandler {
@@ -10,15 +9,19 @@ class PhotoViewController: UIViewController, ErrorHandler {
         return view
     }()
     
+    lazy var panGestureRecognizer: UIPanGestureRecognizer = {
+        let gesture = UIPanGestureRecognizer()
+        gesture.addTarget(self, action: #selector(handlePan(gestureRecognizer:)))
+        return gesture
+    }()
+    
     let viewModel: PhotoViewModel
     
     init(viewModel: PhotoViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        modalPresentationStyle = .overFullScreen
-        hero.isEnabled = true
-        hero.modalAnimationType = .zoom
-        loadImage()
+        setupTransition()
+        setupImage()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,6 +32,7 @@ class PhotoViewController: UIViewController, ErrorHandler {
         super.viewDidLoad()
         
         view.backgroundColor = .clear
+        view.addGestureRecognizer(panGestureRecognizer)
         
         view.addSubview(imageView, constraints: [
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -36,11 +40,29 @@ class PhotoViewController: UIViewController, ErrorHandler {
             imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
+
+    @objc func handlePan(gestureRecognizer: UIPanGestureRecognizer) {
+        switch gestureRecognizer.state {
+        case .began:
+            dismiss(animated: true, completion: nil)
+        case .changed:
+            let translation = gestureRecognizer.translation(in: nil)
+            let progress = translation.y / 2 / view.bounds.height
+            Hero.shared.update(progress)
+            Hero.shared.apply(modifiers: [.position(translation + imageView.center)], to: imageView)
+        default:
+            Hero.shared.finish()
+        }
+    }
     
-    private func loadImage() {
-        guard let imageUrl = viewModel.photo.urlForType(.regular) else { return }
-        guard let url = URL(string: imageUrl) else { return }
-        imageView.hero.id = viewModel.photo.id
-        imageView.af_setImage(withURL: url)
+    private func setupTransition() {
+        modalPresentationStyle = .overFullScreen
+        hero.isEnabled = true
+        hero.modalAnimationType = .zoom
+    }
+    
+    private func setupImage() {
+        imageView.hero.id = viewModel.photoId
+        imageView.image = viewModel.image
     }
 }

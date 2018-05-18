@@ -1,7 +1,7 @@
 import RxSwift
 
 protocol ExploreViewModelDelegate: AnyObject {
-    func didSelectPhoto(_ photo: Photo)
+    func didSelectPhoto(_ photo: Photo, image: UIImage)
 }
 
 class ExploreViewModel {

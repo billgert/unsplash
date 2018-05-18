@@ -83,7 +83,9 @@ extension ExploreViewController: UICollectionViewDataSource {
 
 extension ExploreViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ExplorePhotoCell
+        guard let image = cell.imageView.image else { return }
         let photo = viewModel.photos.value[indexPath.item]
-        viewModel.coordinatorDelegate?.didSelectPhoto(photo)
+        viewModel.coordinatorDelegate?.didSelectPhoto(photo, image: image)
     }
 }
