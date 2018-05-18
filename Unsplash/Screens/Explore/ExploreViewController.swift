@@ -25,6 +25,8 @@ class ExploreViewController: UIViewController, ErrorHandler {
     init(viewModel: ExploreViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        setupBindings()
+        viewModel.getPhotos()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,9 +44,6 @@ class ExploreViewController: UIViewController, ErrorHandler {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        setupBindings()
-        viewModel.getPhotos()
     }
     
     private func setupBindings() {
@@ -84,7 +83,9 @@ extension ExploreViewController: UICollectionViewDataSource {
 
 extension ExploreViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ExplorePhotoCell
+        guard let image = cell.imageView.image else { return }
         let photo = viewModel.photos.value[indexPath.item]
-        viewModel.coordinatorDelegate?.didSelectPhoto(photo)
+        viewModel.coordinatorDelegate?.didSelectPhoto(photo, image: image)
     }
 }

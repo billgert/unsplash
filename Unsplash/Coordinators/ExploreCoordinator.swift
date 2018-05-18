@@ -21,14 +21,14 @@ extension ExploreCoordinator: ExploreViewModelDelegate {
         navigationController.setViewControllers([exploreViewController], animated: false)
     }
     
-    func didSelectPhoto(_ photo: Photo) {
-        presentPhotoViewController(with: photo)
+    func didSelectPhoto(_ photo: Photo, image: UIImage) {
+        presentPhotoViewController(photo, image: image)
     }
 }
 
 extension ExploreCoordinator: PhotoViewModelDelegate {
-    func presentPhotoViewController(with photo: Photo) {
-        let photoViewModel = PhotoViewModel(coordinatorDelegate: self)
+    func presentPhotoViewController(_ photo: Photo, image: UIImage) {
+        let photoViewModel = PhotoViewModel(coordinatorDelegate: self, photoId: photo.id, image: image)
         let photoViewController = PhotoViewController(viewModel: photoViewModel)
         navigationController.present(photoViewController, animated: true)
     }
