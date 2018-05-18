@@ -10,7 +10,7 @@ class ExplorePhotoCell: UICollectionViewCell {
     
     var photo: Photo? {
         didSet {
-            guard let imageUrl = photo?.urlForType(.small) else { return }
+            guard let imageUrl = photo?.urlForType(.regular) else { return }
             guard let url = URL(string: imageUrl) else { return }
             imageView.af_setImage(
                 withURL: url,

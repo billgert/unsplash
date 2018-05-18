@@ -22,7 +22,7 @@ extension ExploreCoordinator: ExploreViewModelDelegate {
     }
     
     func didSelectPhoto(_ photo: Photo) {
-        print(photo.id)
+        presentPhotoViewController(with: photo)
     }
 }
 
