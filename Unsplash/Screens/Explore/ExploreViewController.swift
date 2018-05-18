@@ -55,7 +55,7 @@ class ExploreViewController: UIViewController, ErrorHandler {
             .disposed(by: disposeBag)
         
         searchBar.rx.text.orEmpty
-            .throttle(0.3, scheduler: MainScheduler.instance)
+            .throttle(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(to: viewModel.textInput)
             .disposed(by: disposeBag)
