@@ -21,6 +21,9 @@
 		1849F8AA20AE4A8D00C5DC44 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F8A920AE4A8D00C5DC44 /* ExploreViewModel.swift */; };
 		1849F8AC20AE4F6300C5DC44 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F8AB20AE4F6300C5DC44 /* PhotoViewController.swift */; };
 		1849F8AE20AE4F6A00C5DC44 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F8AD20AE4F6A00C5DC44 /* PhotoViewModel.swift */; };
+		1849F8B020AE564400C5DC44 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F8AF20AE564400C5DC44 /* ViewExtensions.swift */; };
+		1849F8B420AE91F400C5DC44 /* ExplorePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F8B320AE91F400C5DC44 /* ExplorePhotoCell.swift */; };
+		1849F8B620AEA4E800C5DC44 /* ExploreCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849F8B520AEA4E800C5DC44 /* ExploreCollectionLayout.swift */; };
 		18B2312820AE020900F254AA /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B2312720AE020900F254AA /* WebService.swift */; };
 		18B2312A20AE02C300F254AA /* WebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B2312920AE02C300F254AA /* WebRouter.swift */; };
 		18B2312C20AE06A300F254AA /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B2312B20AE06A300F254AA /* NetworkConstants.swift */; };
@@ -45,6 +48,9 @@
 		1849F8A920AE4A8D00C5DC44 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		1849F8AB20AE4F6300C5DC44 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		1849F8AD20AE4F6A00C5DC44 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		1849F8AF20AE564400C5DC44 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		1849F8B320AE91F400C5DC44 /* ExplorePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePhotoCell.swift; sourceTree = "<group>"; };
+		1849F8B520AEA4E800C5DC44 /* ExploreCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCollectionLayout.swift; sourceTree = "<group>"; };
 		18B2312720AE020900F254AA /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		18B2312920AE02C300F254AA /* WebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRouter.swift; sourceTree = "<group>"; };
 		18B2312B20AE06A300F254AA /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 		185FBE6620ADEF6400BBBDF5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1849F8AF20AE564400C5DC44 /* ViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -168,6 +175,8 @@
 		185FBE6820ADF12900BBBDF5 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
+				1849F8B520AEA4E800C5DC44 /* ExploreCollectionLayout.swift */,
+				1849F8B320AE91F400C5DC44 /* ExplorePhotoCell.swift */,
 				18F87AFD20ADF7C50083E9ED /* ExploreViewController.swift */,
 				1849F8A920AE4A8D00C5DC44 /* ExploreViewModel.swift */,
 			);
@@ -310,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1849F8B420AE91F400C5DC44 /* ExplorePhotoCell.swift in Sources */,
 				1849F8A620AE47BF00C5DC44 /* AppCoordinator.swift in Sources */,
 				1849F89020AE184500C5DC44 /* Photo.swift in Sources */,
 				1849F89420AE21B500C5DC44 /* NetworkError.swift in Sources */,
@@ -321,7 +331,9 @@
 				18B2312A20AE02C300F254AA /* WebRouter.swift in Sources */,
 				1817692220ADC4DE009C34F2 /* AppDelegate.swift in Sources */,
 				1849F8A420AE475D00C5DC44 /* Coordinator.swift in Sources */,
+				1849F8B620AEA4E800C5DC44 /* ExploreCollectionLayout.swift in Sources */,
 				1849F89A20AE3E9200C5DC44 /* ErrorHandler.swift in Sources */,
+				1849F8B020AE564400C5DC44 /* ViewExtensions.swift in Sources */,
 				1849F89220AE185200C5DC44 /* SearchResponse.swift in Sources */,
 				18F87AFE20ADF7C50083E9ED /* ExploreViewController.swift in Sources */,
 				1849F8A220AE42D800C5DC44 /* ErrorResponse.swift in Sources */,

@@ -1,8 +1,8 @@
 import Alamofire
 
 enum WebRouter {
-    case photos
-    case searchPhotos(query: String)
+    case photos(perPage: Int)
+    case searchPhotos(query: String, perPage: Int)
 }
 
 extension WebRouter: URLRequestConvertible {
@@ -24,10 +24,10 @@ extension WebRouter: URLRequestConvertible {
     
     var parameters: [String: Any]? {
         switch self {
-        case .searchPhotos(let query):
-            return ["query": query]
-        default:
-            return nil
+        case .photos(let perPage):
+            return ["per_page": perPage]
+        case .searchPhotos(let query, let perPage):
+            return ["query": query, "per_page": perPage]
         }
     }
     

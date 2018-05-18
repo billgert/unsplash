@@ -14,30 +14,26 @@ class ExploreCoordinator: Coordinator {
     }
 }
 
-extension ExploreCoordinator {
+extension ExploreCoordinator: ExploreViewModelDelegate {
     func setExploreViewController() {
         let exploreViewModel = ExploreViewModel(coordinatorDelegate: self)
         let exploreViewController = ExploreViewController(viewModel: exploreViewModel)
         navigationController.setViewControllers([exploreViewController], animated: false)
     }
     
+    func didSelectPhoto(_ photo: Photo) {
+        presentPhotoViewController(with: photo)
+    }
+}
+
+extension ExploreCoordinator: PhotoViewModelDelegate {
     func presentPhotoViewController(with photo: Photo) {
         let photoViewModel = PhotoViewModel(coordinatorDelegate: self)
         let photoViewController = PhotoViewController(viewModel: photoViewModel)
         navigationController.present(photoViewController, animated: true)
     }
-}
-
-extension ExploreCoordinator: ExploreViewModelDelegate {
-    func didSelectPhoto(_ photo: Photo) {
-        print(photo.id)
-    }
-}
-
-extension ExploreCoordinator: PhotoViewModelDelegate {
     
     func didTapDismissButton() {
         navigationController.dismiss(animated: true)
     }
-    
 }
