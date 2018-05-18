@@ -51,6 +51,11 @@ class ExploreCollectionLayout: UICollectionViewLayout {
         }
     }
     
+    override func invalidateLayout() {
+        super.invalidateLayout()
+        cache.removeAll()
+    }
+    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var visibleLayoutAttributes = [UICollectionViewLayoutAttributes]()
         
