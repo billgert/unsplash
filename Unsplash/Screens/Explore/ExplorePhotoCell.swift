@@ -1,5 +1,6 @@
 import UIKit
 import AlamofireImage
+import Hero
 
 class ExplorePhotoCell: UICollectionViewCell {
     lazy var imageView: UIImageView = {
@@ -12,6 +13,7 @@ class ExplorePhotoCell: UICollectionViewCell {
         didSet {
             guard let imageUrl = photo?.urlForType(.regular) else { return }
             guard let url = URL(string: imageUrl) else { return }
+            imageView.hero.id = photo?.id
             imageView.af_setImage(
                 withURL: url,
                 imageTransition: .crossDissolve(0.2)

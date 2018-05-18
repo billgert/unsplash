@@ -25,6 +25,8 @@ class ExploreViewController: UIViewController, ErrorHandler {
     init(viewModel: ExploreViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        setupBindings()
+        viewModel.getPhotos()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,9 +44,6 @@ class ExploreViewController: UIViewController, ErrorHandler {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        setupBindings()
-        viewModel.getPhotos()
     }
     
     private func setupBindings() {
