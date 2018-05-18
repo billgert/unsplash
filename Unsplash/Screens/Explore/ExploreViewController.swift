@@ -43,7 +43,7 @@ class ExploreViewController: UIViewController, ErrorHandler {
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+            ])
     }
     
     private func setupBindings() {
@@ -64,6 +64,20 @@ class ExploreViewController: UIViewController, ErrorHandler {
             .bind(onNext: { [weak self] _ in
                 self?.collectionView.collectionViewLayout.invalidateLayout()
                 self?.collectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.willShowKeyboard.asObservable()
+            .bind(onNext: { [unowned self] (height) in
+                self.collectionView.contentInset.bottom = (height + 6)
+                self.collectionView.scrollIndicatorInsets.bottom = (height + 6)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.willHidekeyboard.asObservable()
+            .bind(onNext: { [unowned self] _ in
+                self.collectionView.contentInset.bottom = 6
+                self.collectionView.scrollIndicatorInsets.bottom = 6
             })
             .disposed(by: disposeBag)
     }

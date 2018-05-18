@@ -8,6 +8,8 @@ class ExploreViewModel {
     let error = Variable<Error>(NetworkError.internet)
     let textInput = Variable<String>("")
     let photos = Variable<[Photo]>([])
+    let willShowKeyboard = Variable<CGFloat>(0.0)
+    let willHidekeyboard = Variable<Bool>(true)
     
     let disposeBag = DisposeBag()
     let webService = WebService()
@@ -17,6 +19,7 @@ class ExploreViewModel {
     init(coordinatorDelegate: ExploreViewModelDelegate) {
         self.coordinatorDelegate = coordinatorDelegate
         bindTextInput()
+        addKeyboardObservers()
     }
 }
 
@@ -52,5 +55,20 @@ extension ExploreViewModel {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func addKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+        willShowKeyboard.value = keyboardHeight
+    }
+    
+    @objc func keyboardWillHide() {
+        willHidekeyboard.value = true
     }
 }
