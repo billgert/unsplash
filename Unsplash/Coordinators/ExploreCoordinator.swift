@@ -28,7 +28,7 @@ extension ExploreCoordinator: ExploreViewModelDelegate {
 
 extension ExploreCoordinator: PhotoViewModelDelegate {
     func presentPhotoViewController(with photo: Photo) {
-        let photoViewModel = PhotoViewModel(coordinatorDelegate: self)
+        let photoViewModel = PhotoViewModel(coordinatorDelegate: self, photo: photo)
         let photoViewController = PhotoViewController(viewModel: photoViewModel)
         navigationController.present(photoViewController, animated: true)
     }

@@ -18,3 +18,9 @@ enum PhotoUrlType: String {
     case small = "small"
     case thumb = "thumb"
 }
+
+extension Photo {
+    static var empty: Photo {
+        return Photo(id: "", urls: [:])
+    }
+}

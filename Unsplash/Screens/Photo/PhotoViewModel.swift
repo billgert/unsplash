@@ -5,9 +5,12 @@ protocol PhotoViewModelDelegate: AnyObject {
 }
 
 class PhotoViewModel {
+    let photo: Photo
+    
     weak var coordinatorDelegate: PhotoViewModelDelegate?
     
-    init(coordinatorDelegate: PhotoViewModelDelegate) {
+    init(coordinatorDelegate: PhotoViewModelDelegate, photo: Photo) {
         self.coordinatorDelegate = coordinatorDelegate
+        self.photo = photo
     }
 }
