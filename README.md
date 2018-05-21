@@ -6,7 +6,7 @@ Combining FRP (RXSwift) and IP. Using delegate pattern where it made more sense 
 
 ## CollectionViewLayout
 
-Current layout is easy to accomplish with UICollectionViewFlowLayout so why create a custom one? The reason was to always have the same widths, but dynamic heghts depending on photo height. I skipped this part (making the view controller delegate of the layout and returning the height) because I missed the parameter in the Photo object and therefore kept it because it was already done. 
+Current layout is easy to accomplish with UICollectionViewFlowLayout so why create a custom one? The reason was to always have the same widths, but dynamic heights depending on photo height. I skipped this part (making the view controller delegate of the layout and returning the height) because I missed the parameter in the Photo object and therefore kept it because it was already done. 
 
 ## Known issues
 
